@@ -5,11 +5,14 @@
         <span>Neumorphism Ec Shop</span>
       </div>
     </header>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="main">
+      <div id="nav">
+        <router-link to="/" class="shop">商品一覧</router-link>
+        <router-link to="/cart" class="shop">カートの中</router-link>
+        <router-link to="/product/add" class="shop">新規商品を追加</router-link>
+      </div>
+      <router-view />
     </div>
-    <router-view />
   </div>
 </template>
 
@@ -26,15 +29,35 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.main {
+  width: 100%;
+  display: flex;
+  #nav {
+    margin-top: 30px;
+    width: 15%;
+    height: 100vh;
+    border-radius: 0 30px 0 0;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background: #e0e6ec;
+    box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #fff;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    .shop {
+      background: #e0e6ec;
+      box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #fff;
+      margin-bottom: 30px;
+    }
 
-    &.router-link-exact-active {
-      color: #42b983;
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #2928f5;
+        opacity: 0.7;
+      }
     }
   }
 }
