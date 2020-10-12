@@ -22,7 +22,7 @@
       </div>
       <div class="item-flex">
         <span>値段 :</span
-        ><input type="text" class="new-price-button" v-model="newPrice" />
+        ><input type="number" class="new-price-button" v-model="newPrice" />
         <div class="new-price-alert">※半角数字のみを入力してください</div>
         <div class="error">{{ message2 }}</div>
       </div>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -91,20 +92,33 @@ export default {
         this.newExplain !== "" &&
         this.file !== ""
       ) {
+        console.log(
+          this,
+          this.newItem,
+          this.newPrice,
+          this.newExplain,
+          this.file
+        );
         data.append("title", this.newItem);
         data.append("path", this.file);
         data.append("price", this.newPrice);
         data.append("text", this.newExplain);
-      } else if (this.newItem === "") {
-        this.message0 = "※商品名を入力してください";
-      } else if (this.file === "") {
-        this.message1 = "※画像ファイルを選択して下さい";
-      } else if (this.newPrice === "") {
-        this.message2 = "※値段を入力して下さい";
-      } else if (this.newExplain === "") {
-        this.message3 = "※商品概要を入力して下さい";
+        axios.post("http://127.0.0.1:8000/api/products", data).then((res) => {
+          console.log(res);
+        });
       } else {
-        this.message4 = "※全ての項目を入力して下さい";
+        if (this.newItem === "") {
+          this.message0 = "※商品名を入力してください";
+        }
+        if (this.file === "") {
+          this.message1 = "※画像ファイルを選択して下さい";
+        }
+        if (this.newPrice === "") {
+          this.message2 = "※値段を入力して下さい";
+        }
+        if (this.newExplain === "") {
+          this.message3 = "※商品概要を入力して下さい";
+        }
       }
     },
   },
