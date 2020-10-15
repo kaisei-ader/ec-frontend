@@ -9,9 +9,12 @@
         <h2>{{ product.title }}</h2>
         <h3>{{ product.text }}</h3>
         <h1>￥{{ product.price }}</h1>
-        <select name="num" v-model="quantity">
-          <option :value="n" v-for="n in 30" :key="n">{{ n }}</option>
-        </select>
+        <div class="flex">
+          <span>数量 :</span>
+          <select name="num" v-model="quantity">
+            <option :value="n" v-for="n in 30" :key="n">{{ n }}</option>
+          </select>
+        </div>
         <button @click="carAdd" id="add-button">カートに追加</button>
       </div>
     </div>
@@ -98,15 +101,22 @@ export default {
         font-size: 50px;
         margin-bottom: 30px;
       }
+
       h3 {
         font-size: 20px;
         margin-bottom: 30px;
       }
+
       h1 {
+        display: block;
         margin-bottom: 30px;
         font-size: 40px;
         font-weight: 600;
         color: rgba(255, 0, 0, 0.6);
+      }
+
+      .flex {
+        display: flex;
       }
       #add-button {
         padding: 20px 100px;
