@@ -1,13 +1,20 @@
 <template>
-  <div class="about">
+  <div class="cart">
     <div class="cart-title">
       <span>カートの中</span>
+    </div>
+    <div class="cart-items">
+      <span>ご注文内容</span>
+      <div class="item"></div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-.about {
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap");
+@import url("https://raw.githubusercontent.com/filipelinhares/ress/master/ress.css");
+
+.cart {
   width: 75%;
   position: relative;
   .cart-title {
@@ -18,6 +25,23 @@
     color: rgba(82, 81, 81);
     font-family: "Noto Sans JP", sans-serif;
     border-bottom: 2px solid;
+  }
+  .cart-items {
+    width: 90%;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      width: 90%;
+      height: 30px;
+      color: rgba(82, 81, 81);
+      font-family: "Noto Sans JP", sans-serif;
+      background: #e0e6ec;
+      box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #ffffff;
+    }
   }
 }
 </style>

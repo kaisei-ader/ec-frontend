@@ -5,7 +5,7 @@
     </div>
     <div class="items">
       <div class="item" v-for="item in items" :key="item.id">
-        <router-link :to="'/product/detail/${item.id}'">
+        <router-link :to="`/product/detail/${item.id}`">
           <img :src="'http://127.0.0.1:8000/' + item.path" />
         </router-link>
         <span class="item-title">{{ item.title }}</span
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     get() {
-      axios.get("http://127.0.0.1:8000/api/products").then((res) => {
+      axios.get("http://127.0.0.1:8000/api/products/").then((res) => {
         this.items = res.data;
       });
     },

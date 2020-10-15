@@ -3,10 +3,16 @@
     <span class="detail-title">商品詳細</span>
     <div class="detail-wrap">
       <div class="detail-img">
-        <img />
+        <img :src="'http://127.0.0.1:8000/' + product.path" />
       </div>
       <div class="detail-explain">
-        <h2>商品名: {{ product.title }}</h2>
+        <h2>{{ product.title }}</h2>
+        <h3>{{ product.text }}</h3>
+        <h1>￥{{ product.price }}</h1>
+        <select name="num" v-model="quantity">
+          <option :value="n" v-for="n in 30" :key="n">{{ n }}</option>
+        </select>
+        <button @click="carAdd" id="add-button">カートに追加</button>
       </div>
     </div>
   </div>
@@ -17,16 +23,27 @@ export default {
   name: "detail",
   data() {
     return {
-      product: [],
+      product: {},
+      quantity: "1",
     };
   },
   created() {
     this.get();
   },
   methods: {
+    carAdd() {
+      axios
+        .post("http://127.0.0.1:8000/api/carts", {
+          quantity: this.quantity,
+          productId: this.$route.params.id,
+        })
+        .then(() => {
+          this.$router.push("/cart");
+        });
+    },
     get() {
       axios
-        .get("`http://127.0.0.1:8000/api/products/${this.$router.params.id`")
+        .get(`http://127.0.0.1:8000/api/products/${this.$route.params.id}`)
         .then((res) => {
           this.product = res.data;
         });
@@ -63,13 +80,56 @@ export default {
       height: 400px;
       background: #e0e6ec;
       box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #ffffff;
+
+      img {
+        width: 100%;
+      }
     }
     .detail-explain {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       width: 50%;
-      font-size: 16px;
       color: rgba(82, 81, 81);
       font-family: "Noto Sans JP", sans-serif;
-      text-align: left;
+
+      h2 {
+        font-size: 50px;
+        margin-bottom: 30px;
+      }
+      h3 {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+      h1 {
+        margin-bottom: 30px;
+        font-size: 40px;
+        font-weight: 600;
+        color: rgba(255, 0, 0, 0.6);
+      }
+      #add-button {
+        padding: 20px 100px;
+        border-radius: 20px;
+        border: none;
+        color: rgb(82, 81, 81);
+        font-weight: 600;
+        background: #e0e6ec;
+        box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #ffffff;
+        cursor: pointer;
+        font-family: "Noto Sans JP", sans-serif;
+        transition: all 0.1s;
+
+        &:focus {
+          outline: 0;
+        }
+
+        &:active,
+        &.active {
+          outline: 0;
+          box-shadow: none;
+        }
+      }
     }
   }
 }
