@@ -4,22 +4,40 @@
       <span>商品一覧</span>
     </div>
     <div class="items">
-      <div class="item" />
-      <div class="item" />
-      <div class="item" />
-      <div class="item" />
-      <div class="item" />
-      <div class="item" />
+      <div class="item" v-for="item in items" :key="item.id">
+        <router-link :to="'/product/detail/${item.id}'">
+          <img :src="'http://127.0.0.1:8000/' + item.path" />
+        </router-link>
+        <span class="item-title">{{ item.title }}</span
+        ><br />
+        <span class="item-price">￥{{ item.price }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import axios from "axios";
 
 export default {
   name: "Home",
   components: {},
+  data() {
+    return {
+      items: [],
+    };
+  },
+  created() {
+    this.get();
+  },
+  methods: {
+    get() {
+      axios.get("http://127.0.0.1:8000/api/products").then((res) => {
+        this.items = res.data;
+      });
+    },
+  },
 };
 </script>
 
@@ -47,10 +65,28 @@ export default {
 
     .item {
       width: 30%;
-      height: 300px;
       margin-bottom: 40px;
-      background: #e0e6ec;
-      box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #fff;
+
+      img {
+        width: 100%;
+        background: #e0e6ec;
+        box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #fff;
+        margin-bottom: 15px;
+      }
+      .item-title {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 20px;
+        color: rgba(82, 81, 81);
+        font-family: "Noto Sans JP", sans-serif;
+      }
+      .item-price {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 20px;
+        color: rgba(255, 0, 0, 0.6);
+      }
     }
   }
 }

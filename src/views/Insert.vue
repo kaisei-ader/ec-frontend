@@ -92,20 +92,19 @@ export default {
         this.newExplain !== "" &&
         this.file !== ""
       ) {
-        console.log(
-          this,
-          this.newItem,
-          this.newPrice,
-          this.newExplain,
-          this.file
-        );
         data.append("title", this.newItem);
-        data.append("path", this.file);
+        data.append("image", this.file);
         data.append("price", this.newPrice);
         data.append("text", this.newExplain);
-        axios.post("http://127.0.0.1:8000/api/products", data).then((res) => {
-          console.log(res);
-        });
+        axios
+          .post("http://127.0.0.1:8000/api/products", data, {
+            headers: {
+              "Content-Type": "mutlipart/form-data",
+            },
+          })
+          .then(() => {
+            this.$router.push("/");
+          });
       } else {
         if (this.newItem === "") {
           this.message0 = "※商品名を入力してください";
