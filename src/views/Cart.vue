@@ -12,7 +12,7 @@
         <p>{{ cart.quantity * cart.product.price }}</p>
         <button @click="() => remove(cart.id)">削除</button>
       </div>
-      {{ this.amount }}
+      <p v-if="amount !== 0">{{ this.amount }}</p>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       carts: [],
-      amount: "",
+      amount: 0,
     };
   },
   created() {
@@ -34,19 +34,19 @@ export default {
     get() {
       Axios.get("http://127.0.0.1:8000/api/carts").then((res) => {
         this.carts = res.data;
+        this.totalAmount();
       });
     },
     remove(id) {
       Axios.delete(`http://127.0.0.1:8000/api/carts/${id}`).then(() => {
         this.get();
-        this.totalAmount()
       });
     },
     totalAmount() {
-      .forEach(element => {
-        
+      this.amount = 0;
+      this.carts.forEach((value) => {
+        this.amount += value.quantity * value.product.price;
       });
-      this.amount=
     },
   },
 };
