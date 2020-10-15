@@ -8,9 +8,11 @@
       <div class="item" v-for="cart in carts" :key="cart.id">
         <img :src="'http://127.0.0.1:8000/' + cart.product.path" />
         <p>{{ cart.product.title }}</p>
-        <p>{{ cart.product.price }}</p>
         <p>{{ cart.quantity }}</p>
+        <p>{{ cart.quantity * cart.product.price }}</p>
+        <button @click="() => remove(cart.id)">削除</button>
       </div>
+      {{ this.amount }}
     </div>
   </div>
 </template>
@@ -22,6 +24,7 @@ export default {
   data() {
     return {
       carts: [],
+      amount: "",
     };
   },
   created() {
@@ -32,6 +35,18 @@ export default {
       Axios.get("http://127.0.0.1:8000/api/carts").then((res) => {
         this.carts = res.data;
       });
+    },
+    remove(id) {
+      Axios.delete(`http://127.0.0.1:8000/api/carts/${id}`).then(() => {
+        this.get();
+        this.totalAmount()
+      });
+    },
+    totalAmount() {
+      .forEach(element => {
+        
+      });
+      this.amount=
     },
   },
 };
