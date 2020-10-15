@@ -97,7 +97,7 @@ export default {
         data.append("price", this.newPrice);
         data.append("text", this.newExplain);
         axios
-          .post("http://127.0.0.1:8000/api/products", data, {
+          .post(`${process.env.VUE_APP_API_URL}/api/products`, data, {
             headers: {
               "Content-Type": "mutlipart/form-data",
             },

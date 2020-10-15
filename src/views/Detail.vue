@@ -3,7 +3,7 @@
     <span class="detail-title">商品詳細</span>
     <div class="detail-wrap">
       <div class="detail-img">
-        <img :src="'http://127.0.0.1:8000/' + product.path" />
+        <img :src="'${process.env.VUE_APP_API_URL}/' + product.path" />
       </div>
       <div class="detail-explain">
         <h2>{{ product.title }}</h2>
@@ -36,7 +36,7 @@ export default {
   methods: {
     carAdd() {
       axios
-        .post("http://127.0.0.1:8000/api/carts", {
+        .post(`${process.env.VUE_APP_API_URL}/api/carts`, {
           quantity: this.quantity,
           productId: this.$route.params.id,
         })
@@ -46,7 +46,9 @@ export default {
     },
     get() {
       axios
-        .get(`http://127.0.0.1:8000/api/products/${this.$route.params.id}`)
+        .get(
+          `${process.env.VUE_APP_API_URL}/api/products/${this.$route.params.id}`
+        )
         .then((res) => {
           this.product = res.data;
         });

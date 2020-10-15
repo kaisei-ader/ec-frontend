@@ -6,7 +6,7 @@
     <div class="cart-items">
       <span>ご注文内容</span>
       <div class="item" v-for="cart in carts" :key="cart.id">
-        <img :src="'http://127.0.0.1:8000/' + cart.product.path" />
+        <img :src="'process.env.VUE_APP_API_URL/' + cart.product.path" />
         <p>{{ cart.product.title }}</p>
         <p>{{ cart.quantity }}</p>
         <p>{{ cart.quantity * cart.product.price }}</p>
@@ -32,15 +32,17 @@ export default {
   },
   methods: {
     get() {
-      Axios.get("http://127.0.0.1:8000/api/carts").then((res) => {
+      Axios.get(`${process.env.VUE_APP_API_URL}/api/carts`).then((res) => {
         this.carts = res.data;
         this.totalAmount();
       });
     },
     remove(id) {
-      Axios.delete(`http://127.0.0.1:8000/api/carts/${id}`).then(() => {
-        this.get();
-      });
+      Axios.delete(`${process.env.VUE_APP_API_URL}/api/carts/${id}`).then(
+        () => {
+          this.get();
+        }
+      );
     },
     totalAmount() {
       this.amount = 0;
