@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     get() {
-      axios.get(`${process.env.VUE_APP_API_URL}/api/products`).then((res) => {
+      axios.get(process.env.VUE_APP_API_URL + "/api/products").then((res) => {
         this.items = res.data;
       });
     },
