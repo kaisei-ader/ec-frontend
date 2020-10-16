@@ -119,6 +119,10 @@ export default {
 
       .flex {
         display: flex;
+        margin-bottom: 30px;
+        span {
+          margin-right: 10px;
+        }
       }
       #add-button {
         padding: 20px 100px;

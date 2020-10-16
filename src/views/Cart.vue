@@ -5,14 +5,28 @@
     </div>
     <div class="cart-items">
       <span>ご注文内容</span>
-      <div class="item" v-for="cart in carts" :key="cart.id">
-        <img :src="`http://127.0.0.1:8000/${cart.product.path}`" />
-        <p>{{ cart.product.title }}</p>
-        <p>{{ cart.quantity }}</p>
-        <p>{{ cart.quantity * cart.product.price }}</p>
-        <button @click="() => remove(cart.id)">削除</button>
-      </div>
-      <p v-if="amount !== 0">{{ this.amount }}</p>
+      <table>
+        <tr>
+          <th>商品画像</th>
+          <th>商品名</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+        <tr class="item" v-for="cart in carts" :key="cart.id">
+          <td class="img">
+            <img :src="`http://127.0.0.1:8000/${cart.product.path}`" />
+          </td>
+          <td>{{ cart.product.title }}</td>
+          <td>{{ cart.quantity }}</td>
+          <td>{{ cart.quantity * cart.product.price }}</td>
+          <td><button @click="() => remove(cart.id)">削除</button></td>
+        </tr>
+        <td>合計金額</td>
+        <td></td>
+        <td></td>
+        <td>{{ this.amount }}</td>
+        <td></td>
+      </table>
     </div>
   </div>
 </template>
@@ -60,6 +74,7 @@ export default {
 .cart {
   width: 75%;
   position: relative;
+
   .cart-title {
     position: absolute;
     top: 5%;
@@ -69,6 +84,7 @@ export default {
     font-family: "Noto Sans JP", sans-serif;
     border-bottom: 2px solid;
   }
+
   .cart-items {
     width: 90%;
     position: absolute;
@@ -84,6 +100,38 @@ export default {
       font-family: "Noto Sans JP", sans-serif;
       background: #e0e6ec;
       box-shadow: 7px 7px 14px #bec4c9, -7px -7px 14px #ffffff;
+    }
+
+    table {
+      position: absolute;
+      margin-top: 20px;
+      top: 80%;
+      left: -5%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 90%;
+
+      tr {
+        border-bottom: solid 1px #eee;
+        cursor: pointer;
+      }
+
+      th,
+      td {
+        text-align: center;
+        width: 25%;
+        padding: 15px 0;
+      }
+
+      .totall {
+        color: rgba(82, 81, 81);
+        font-family: "Noto Sans JP", sans-serif;
+        font-size: 30px;
+      }
+
+      img {
+        width: 100px;
+      }
     }
   }
 }
