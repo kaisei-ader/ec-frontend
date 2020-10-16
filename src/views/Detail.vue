@@ -3,7 +3,7 @@
     <span class="detail-title">商品詳細</span>
     <div class="detail-wrap">
       <div class="detail-img">
-        <img :src="`${product.path}`" />
+        <img :src="`http://127.0.0.1:8000/${product.path}`" />
       </div>
       <div class="detail-explain">
         <h2>{{ product.title }}</h2>
