@@ -34,7 +34,7 @@ export default {
   methods: {
     get() {
       axios.get(`${process.env.VUE_APP_API_URL}/api/products`).then((res) => {
-        console.log(res.data);
+        console.log(res.data.path);
         this.items = res.data;
       });
     },
