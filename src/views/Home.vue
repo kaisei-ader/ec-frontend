@@ -6,7 +6,7 @@
     <div class="items">
       <div class="item" v-for="item in items" :key="item.id">
         <router-link :to="`/product/detail/${item.id}`">
-          <img :src="`${process.env.VUE_APP_API_URL}/${item.path}`" />
+          <img :src="`${item.path}`" />
         </router-link>
         <span class="item-title">{{ item.title }}</span
         ><br />
@@ -34,7 +34,6 @@ export default {
   methods: {
     get() {
       axios.get(`${process.env.VUE_APP_API_URL}/api/products`).then((res) => {
-        console.log(res.data.path);
         this.items = res.data;
       });
     },
