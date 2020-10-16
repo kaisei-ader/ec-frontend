@@ -3,7 +3,7 @@
     <span class="detail-title">商品詳細</span>
     <div class="detail-wrap">
       <div class="detail-img">
-        <img :src="`https://127.0.0.1:8000/${product.path}`" />
+        <img :src="`${apiUrl}/${product.path}`" />
       </div>
       <div class="detail-explain">
         <h2>{{ product.title }}</h2>
@@ -28,6 +28,7 @@ export default {
     return {
       product: {},
       quantity: "1",
+      apiUrl: process.env.VUE_APP_API_URL,
     };
   },
   created() {
