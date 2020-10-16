@@ -14,7 +14,7 @@
         </tr>
         <tr class="item" v-for="cart in carts" :key="cart.id">
           <td class="img">
-            <img :src="`http://127.0.0.1:8000/${cart.product.path}`" />
+            <img :src="`https://127.0.0.1:8000/${cart.product.path}`" />
           </td>
           <td>{{ cart.product.title }}</td>
           <td>{{ cart.quantity }}</td>

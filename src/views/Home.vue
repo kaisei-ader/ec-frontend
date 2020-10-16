@@ -6,7 +6,7 @@
     <div class="items">
       <div class="item" v-for="item in items" :key="item.id">
         <router-link :to="`/product/detail/${item.id}`">
-          <img :src="`http://127.0.0.1:8000/${item.path}`" />
+          <img :src="`https://127.0.0.1:8000/${item.path}`" />
         </router-link>
         <span class="item-title">{{ item.title }}</span
         ><br />
