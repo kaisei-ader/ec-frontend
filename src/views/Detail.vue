@@ -3,7 +3,7 @@
     <span class="detail-title">商品詳細</span>
     <div class="detail-wrap">
       <div class="detail-img">
-        <img :src="`${process.env.VUE_APP_API_URL}/ ${product.path}`"/>
+        <img :src="`${product.path}`" />
       </div>
       <div class="detail-explain">
         <h2>{{ product.title }}</h2>

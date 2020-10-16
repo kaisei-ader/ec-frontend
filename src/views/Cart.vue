@@ -6,7 +6,7 @@
     <div class="cart-items">
       <span>ご注文内容</span>
       <div class="item" v-for="cart in carts" :key="cart.id">
-        <img :src="`${process.env.VUE_APP_API_URL}/${cart.product.path}`" />
+        <img :src="`${cart.product.path}`" />
         <p>{{ cart.product.title }}</p>
         <p>{{ cart.quantity }}</p>
         <p>{{ cart.quantity * cart.product.price }}</p>
